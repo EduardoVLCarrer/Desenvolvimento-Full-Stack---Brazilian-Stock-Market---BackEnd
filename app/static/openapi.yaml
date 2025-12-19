@@ -1,0 +1,121 @@
+openapi: 3.0.3
+info:
+  title: Stock Analysis API
+  version: 1.0.0
+  description: API para análise de ações, consulta e remoção de análises no banco.
+
+servers:
+  - url: http://localhost:5000
+
+paths:
+  /analisar/{ticker}:
+    post:
+      summary: Analisa um ticker, salva no banco e retorna a análise
+      parameters:
+        - name: ticker
+          in: path
+          required: true
+          schema:
+            type: string
+          example: VALE3
+      responses:
+        "200":
+          description: Análise criada/registrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaliseAcao"
+        "400":
+          description: Ticker inválido
+        "500":
+          description: Erro interno
+
+  /delete/{ticker}:
+    delete:
+      summary: Remove registros do ticker e retorna os itens removidos
+      parameters:
+        - name: ticker
+          in: path
+          required: true
+          schema:
+            type: string
+          example: VALE3
+      responses:
+        "200":
+          description: Lista de registros removidos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AnaliseAcao"
+        "404":
+          description: Nenhum registro encontrado
+        "500":
+          description: Erro interno
+
+  /acoes_viaveis/{comprar}:
+    get:
+      summary: Lista ações por status de análise (SIM/NAO)
+      parameters:
+        - name: comprar
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [SIM, NAO]
+      responses:
+        "200":
+          description: Lista de ações
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AnaliseAcao"
+        "400":
+          description: Parâmetro inválido
+        "500":
+          description: Erro interno
+
+  /acoes_especifica/{ticker}:
+    get:
+      summary: Lista análises registradas para um ticker específico
+      parameters:
+        - name: ticker
+          in: path
+          required: true
+          schema:
+            type: string
+          example: VALE3
+      responses:
+        "200":
+          description: Lista de análises do ticker
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AnaliseAcao"
+        "404":
+          description: Nenhum registro encontrado
+        "500":
+          description: Erro interno
+
+components:
+  schemas:
+    AnaliseAcao:
+      type: object
+      properties:
+        acao:
+          type: string
+          example: VALE3
+        analise:
+          type: string
+          enum: [SIM, NAO]
+          example: SIM
+        data_analise:
+          type: string
+          format: date-time
+          example: "2025-12-17T21:10:00"
+      required: [acao, analise, data_analise]
