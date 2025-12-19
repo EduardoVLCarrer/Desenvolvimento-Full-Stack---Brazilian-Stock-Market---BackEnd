@@ -1,6 +1,6 @@
 # Stock Analysis API
 
-API desenvolvida em Flask para análise de ações com base em dados do Alpha Vantage. Realiza a análise de dividendo de ações brasileiras, executa a persistência dos resultados em banco de dados SQLite e disponibilização das informações para consumo via Front-End.
+API desenvolvida em Flask para análise de ações com base em dados do Alpha Vantage. Realiza a análise de dividendo de ações brasileiras, executa a persistência dos resultados em banco de dados SQLite e disponibiliza as informações para consumo via Front-End.
 
 A API também conta com documentação interativa utilizando Swagger (OpenAPI 3).
 
