@@ -18,7 +18,7 @@ A API também conta com documentação interativa utilizando Swagger (OpenAPI 3)
 
 ## 🛠️ Tecnologias Utilizadas
 
-- Python 3.x
+- Python 3.11.4
 - Flask
 - Flask-CORS
 - SQLAlchemy
@@ -30,7 +30,7 @@ A API também conta com documentação interativa utilizando Swagger (OpenAPI 3)
 
 ## 📋 Pré-requisitos
 
-- Python 3.x instalado
+- Python 3.11.4 instalado
 - Git (opcional, para clonar o repositório)
 
 ---
